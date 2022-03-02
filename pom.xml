@@ -55,6 +55,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <rabbitmq.version>5.14.2</rabbitmq.version>
+    <ad-proto-def.version>1.1.79</ad-proto-def.version>
+    <google.protobuf.version>3.2.0</google.protobuf.version>
     <commons-cli.version>1.5.0</commons-cli.version>
     <metrics.version>4.2.8</metrics.version>
     <micrometer.version>1.8.3</micrometer.version>
@@ -106,6 +108,11 @@
       <groupId>com.rabbitmq</groupId>
       <artifactId>amqp-client</artifactId>
       <version>${rabbitmq.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>${google.protobuf.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>
@@ -409,6 +416,14 @@
             <source-highlighter>coderay</source-highlighter>
           </attributes>
 
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>9</source>
+          <target>9</target>
         </configuration>
       </plugin>
 

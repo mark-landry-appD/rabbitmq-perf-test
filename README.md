@@ -147,3 +147,8 @@ for the support timeline of this library.
 This package, the RabbitMQ Performance Testing Tool library, is triple-licensed under
 the Mozilla Public License 2.0 ("MPL"), the GNU General Public License
 version 2 ("GPL") and the Apache License version 2 ("ASL").
+
+
+#####################################################
+1. included compiled version of events from https://github.com/AppDirect/appdirect-proto-def.git
+2. Add customized test methods to build serialized binary file. 
