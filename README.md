@@ -152,3 +152,24 @@ version 2 ("GPL") and the Apache License version 2 ("ASL").
 #####################################################
 1. included compiled version of events from https://github.com/AppDirect/appdirect-proto-def.git
 2. Add customized test methods to build serialized binary file. 
+
+
+###################################
+Steps to run against OD from local repo.
+
+1. setup port-forwarding to od rabbitmq microservice on one terminal.
+    a. kubectl -n od-namespace get pods
+    b. find rabbitmq pod (rabbitmqpod) from list
+    c. kubectl -n od-namespace port-forward rabbitmpod 5672:5672
+2. create x number of binary files (constant defaulted to 60) by running the following junit rabbit test
+     test:createProtoBufBinaryFiles  class:com.rabbitmq.perf.LocalFilesMessageBodySourceTest.java
+     
+3. Run perfTest script within local repo terminal.
+
+  ./scripts/PerfTest -x 1  -t direct -r 1 -k "jbilling.events.invoice.core"  -e "JBilling.jBillingEventsExchange" -ad false -B target/Invoice_1.bin  --body-content-type application/x-protobuf -u "InvoiceCore.jBillingInvoicesQueue" -f durable -f persistent -y 0 --predeclared  -h "amqp://fk7hyzejh:TPO9VWkq7tcNjz3W@localhost:5672/od-fk7hyzejh" --message-properties "_msg_type_name_=com.appdirect.jbilling.event.invoice.JBillingInvoiceEvent,priority=0"     
+   
+    Note: make sure to update the -h "URI" to include rabbitmq user@password and virtual-host.
+       user/password can be found in OD K8s Portal. Under deployments rabbitmq service. 
+       rabbitmq_user, rabbitmq_password and virtual-host is the od environment name
+
+
